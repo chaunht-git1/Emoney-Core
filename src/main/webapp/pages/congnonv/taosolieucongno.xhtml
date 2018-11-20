@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+        
+        <b:container fluid="true">
+            <h:form>
+               
+                <b:panel title="Điều kiện" look="primary" collapsible="false" >
+                    <b:row>
+                        <b:column medium-screen="6">
+                            <h:outputText value="Ngày tạo :" />
+                            <p:calendar  id="ngay" navigator="true" yearRange="-100:+0" pattern="dd/MM/yyyy"/>
+                            <b:commandButton value="Tạo số liệu" look="primary"  class="btn-sm" action="#{taocnnvManagedBean.taosolieu()}"  />
+                            <b:commandButton value="Hiện thông tin" look="primary"  class="btn-sm" action="#{taocnnvManagedBean.getsolieu()}"  /> 
+                        </b:column>
+                        <b:column  medium-screen="6">
+                            
+                                <b:buttonGroup style="float: right">
+                                    <h:commandLink >
+                                        <p:graphicImage value="../../resources/image/ms-excel.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="baocaosodu" />
+                                    </h:commandLink>
+                                </b:buttonGroup>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+                <b:panel title="Thông tin dữ liệu" look="primary" collapsible="false" >
+                 
+                    <b:row>
+                        <p:dataTable id="tbl" var="item" value="#{taocnnvManagedBean.nhanvienListTemps}" reflow="true" rows="8" paginator="true" >     
+                            
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column rowspan="2" headerText="Nhân viên"  width="300"/>
+                                    <p:column rowspan="2" headerText="Loại tiền" />
+                                    <p:column rowspan="2" headerText="Đầu kỳ" />
+                                    <p:column colspan="2" headerText="Tạm ứng" />
+                                    <p:column colspan="2" headerText="Hoàn ứng" />
+                                    <p:column rowspan="2" headerText="Cuối kỳ" />
+                                </p:row>
+                                <p:row>
+                                    <p:column headerText="Danh sách" />
+                                    <p:column headerText="Phát sinh" />
+                                    <p:column headerText="Danh sách" />
+                                    <p:column headerText="Phát sinh" />
+                                </p:row>
+                            </p:columnGroup>
+   
+                            <p:column headerText="Nhân viên">
+                                <h:outputText value="#{item.userName}" />
+                            </p:column>
+                            <p:column headerText="Loại tiền">
+                                <h:outputText value="#{item.idLoaicongno}" />
+                            </p:column>
+                            <p:column headerText="Đầu kỳ ">
+                                <h:outputText value="#{item.sodudauky}" />
+                            </p:column>
+                            <p:column headerText="Danh sách ">
+                                <h:outputText value="#{item.sotientamungds}" />
+                            </p:column>
+                            <p:column headerText="Hoàn ứng danh sách ">
+                                <h:outputText value="#{item.sotienhoanungds}" />
+                            </p:column>
+                            <p:column headerText="Tạm ứng phát sinh">
+                                <h:outputText value="#{item.sotientamungps}" />
+                            </p:column>
+                            <p:column headerText="Hoàn ứng phát sinh">
+                                <h:outputText value="#{item.sotienhoanungps}" />
+                            </p:column>
+                            <p:column headerText="Cuối kỳ ">
+                                <h:outputText value="#{item.soducuoiky}" />
+                            </p:column>
+                        </p:dataTable>
+                    </b:row>
+                </b:panel>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>

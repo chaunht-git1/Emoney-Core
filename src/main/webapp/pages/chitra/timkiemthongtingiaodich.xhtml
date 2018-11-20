@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"     
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../templates/main.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">   
+        <h:form id="messageform">
+            <h:message for="messageform"  />
+        </h:form> 
+        <h:form>
+            <b:row>
+                <b:column span="3">
+                    <b:row>
+                        <div class="input-group">  
+                        <b:panel title="Hồ sơ trong ngày" look="primary" collapsible="false" >  
+                                <b:selectOneMenu id="doitac"  value="#{hoibaoManagerBean.iddoitac}" required="true" requiredMessage="Chọn Đối tác" styleClass="input-checklist-nomal">
+                                    <f:selectItem itemLabel="--Loại tìm kiếm--"/>
+                                    <f:selectItem itemLabel="Đã gọi khách" itemValue="Y"/>
+                                    <f:selectItem itemLabel="Chưa gọi khách" itemValue="N"/>
+                                    <f:selectItem itemLabel="Bổ sung sau" itemValue="E"/>
+                                </b:selectOneMenu>
+                                <h:commandButton class="btn btn-success btn-sm"  value="Ok"  />
+                        </b:panel>
+                        </div>
+                    </b:row>
+                </b:column>
+                <b:column span="9">
+                    <b:row>
+                        <b:panel title="Kết quả tìm kiếm" look="primary" collapsible="false" >
+                            
+                        </b:panel>
+                    </b:row>
+                    <b:row>
+                        <b:column class="well">
+                        <b:column span="6" >
+                                <b:panel title="Thông tin giao dịch" look="primary" collapsible="false" >
+
+                                </b:panel>
+                            </b:column>
+                            <b:column span="6">
+                                <b:panel title="Thông tin khách hàng" look="primary" collapsible="false" >
+
+                                </b:panel>
+                            </b:column>
+                         </b:column> 
+                    </b:row>
+                </b:column>
+            </b:row>
+        </h:form>
+   </ui:define>
+
+</ui:composition>

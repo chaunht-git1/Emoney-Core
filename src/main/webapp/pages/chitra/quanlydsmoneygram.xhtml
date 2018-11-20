@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/default/mainpage.xhtml">
+    <ui:define name="content">     
+        <h:form>
+            <div class="container col-sm-12">
+                <div class="row">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="min-width: 140px">
+                             <h:commandLink value="Trang chủ" action="#{chuyentrangManagedBean.chuyentrangchu()}"/>
+                        </span>
+                        <p:messages id="messages" showSummary="false" showDetail="true" autoUpdate="true" closable="true" />
+                    </div>
+                </div> 
+                <div class="row ">
+                    <div class="col-sm-12 wellcustom" >
+                   
+                        <div class = "input-group">
+                            <span class="input-group-addon" style="min-width: 140px;font-size: large">
+                                <h:outputLabel style="float: left">Loại tìm kiếm</h:outputLabel>
+                            </span>
+                            <h:selectOneMenu  id="timtrangthai" value="#{importFileManagedBean.idtrangthaitimkiem}" styleClass="dropdown form-control btn-lg ">                     
+                                <f:selectItem itemLabel="--Đợt hồ sơ--" />
+                                <f:selectItem  itemValue="HS00001" itemLabel="Hồ sơ trong ngày"/>
+                                <f:selectItem  itemValue="HS00002" itemLabel="Hồ sơ ngày trước" />
+                                <f:selectItem  itemValue="HS00003" itemLabel="Hồ sơ thiếu thông tin ." />
+                                <f:ajax event="change" listener="#{importFileManagedBean.timmastertheomatrangthai( )}" render="showdata"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container col-sm-3">
+
+                    <div class="row wellcustom">
+                        <div class="btn-group"> 
+                            <h:commandButton class="btn btn-success btn-lg" value="Đợt 1" action="#{chitragphieuManagedBean.showdatagdsmoneygram('dot1')}" >
+                                <p:ajax update="showdata"/>
+                            </h:commandButton> 
+                            <h:commandButton class="btn btn-success btn-lg"  value="Đợt 3" action="#{chitragphieuManagedBean.showdatagdsmoneygram('dot3')}" >
+                                <p:ajax update="showdata"/>
+                            </h:commandButton> 
+
+                        </div>
+                    </div>
+                    <div class="row wellcustom">
+
+                        <p:dataTable id="showdata" rowIndexVar="rowIndex" value="#{chitragphieuManagedBean.dsdshosomg}" var="item" paginator="true"  rows="20" paginatorPosition="top"  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " rowsPerPageTemplate="20" tableStyle="width:auto">
+                            <p:column style="width: 2% ; text-align: center" >  
+                                <f:facet name="header">
+                                    <h:outputText value="Stt"/>
+                                </f:facet>
+                                <p:outputLabel value="#{rowIndex+1}" />
+                            </p:column>
+                            <p:column  >
+                                <f:facet name="header">
+                                    <h:outputText value="Tên nhân viên"/>
+                                </f:facet>
+                                <h:outputLabel style="font-size: larger" value="#{item.hotennv}"/>
+                            </p:column>
+                            <p:column style="text-align: center">
+                                <f:facet name="header">
+                                    <h:outputText value="Số hồ sơ:"/>
+                                </f:facet>
+                                <h:outputLabel style="font-size: larger;color: red" value="#{item.shs}"/>
+                            </p:column>
+
+
+
+                        </p:dataTable>
+
+                    </div>
+
+                </div>
+     
+                
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition> 

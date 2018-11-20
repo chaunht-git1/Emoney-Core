@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="content">   
+     <b:container fluid="true">
+       <b:row>
+           <b:column span="12">
+            <h:form>
+                <p:dataTable id="showdata" binding="#{table}" value="#{hoibaoManagerBean.dschitiet}" var="item" paginator="true"    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rows="6">
+                       <p:column>
+                             <div class="well well-sm">
+                                 #{item.khoaimage}
+                             </div>
+                        </p:column>
+      
+
+                    </p:dataTable>
+
+            </h:form>
+        </b:column>
+       </b:row>
+     </b:container> 
+    </ui:define>
+</ui:composition> 
+
+

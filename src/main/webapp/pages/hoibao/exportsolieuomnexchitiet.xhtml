@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+        
+        <b:container fluid="true">
+            <h:form>
+                 <b:panel title="Điều kiện" look="primary" collapsible="false" >
+                    <b:row>
+                        <b:column medium-screen="6">
+                             <b:buttonGroup  >
+                                    <h:commandLink >
+                                        <p:graphicImage value="../../resources/image/ms-excel.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="#{exportOmnexManagedBean.filename}" />
+                                    </h:commandLink>
+                             </b:buttonGroup>
+                        </b:column>
+                    </b:row>
+                 </b:panel>
+            
+                <b:panel title="Thông tin dữ liệu" look="primary" collapsible="false" >
+                    <b:row>
+                        <p:dataTable id="tbl" var="item"  binding="#{table}" value="#{exportOmnexManagedBean.baodxn2018s}" reflow="true" rows="8" paginator="true" >            
+   
+                            <p:column headerText="Stt">
+                                <h:outputText value="#{table.rowIndex+1}" />
+                            </p:column>
+                            <p:column headerText="ORDER NUMBER">
+                                <h:outputText value="#{item.ordernumber}" />
+                            </p:column>
+                            <p:column headerText="SENDER">
+                                <h:outputText value="#{item.sender}" />
+                            </p:column>
+                            <p:column headerText="AMOUNT">
+                                <h:outputText value="#{item.amount}" />
+                            </p:column>
+                            <p:column headerText="CMND">
+                                <h:outputText value="#{item.cmnd}" />
+                            </p:column>
+                            <p:column headerText="AMOUNT IN VND">
+                                <h:outputText value="#{item.amountinvnd}" />
+                            </p:column>
+                        </p:dataTable>
+                    </b:row>
+                </b:panel>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>

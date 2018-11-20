@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+        
+        <b:container fluid="true">
+            <h:form>
+                 <b:panel title="Điều kiện" look="primary" collapsible="false" >
+                    <b:row>
+                        <b:column medium-screen="6">
+                             <b:buttonGroup  >
+                                    <h:commandLink >
+                                        <p:graphicImage value="../../resources/image/ms-excel.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="#{exportOmnexManagedBean.filename}" />
+                                    </h:commandLink>
+
+                                 <p:commandButton value="Lưu dữ liệu" action="#{exportOmnexManagedBean.showdetailfilep(item.iddoitac)}"  >
+                                 
+                                 </p:commandButton>
+
+                             </b:buttonGroup>
+                        </b:column>
+                    </b:row>
+                 </b:panel>
+            
+                <b:panel title="Thông tin dữ liệu" look="primary" collapsible="false" >
+                    <b:row>
+                        <p:dataTable id="tbl" var="item"  binding="#{table}" value="#{exportOmnexManagedBean.vwsolieuhbfilep2018}" reflow="true" rows="8" paginator="true" >            
+   
+                            <p:column headerText="Stt">
+                                <h:outputText value="#{table.rowIndex+1}" />
+                            </p:column>
+                            <p:column headerText="Số biên nhận">
+                                <h:outputText value="#{item.sobn}" />
+                            </p:column>
+                            <p:column headerText="Mã số">
+                                <h:outputText value="#{item.manguoinhan}" />
+                            </p:column>
+                            <p:column headerText="Số tiền">
+                                <h:outputText value="#{item.sotien}" />
+                            </p:column>
+                            <p:column headerText="Loại tiền">
+                                <h:outputText value="#{item.loaitienchi}" />
+                            </p:column>
+                        </p:dataTable>
+                    </b:row>
+                </b:panel>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>

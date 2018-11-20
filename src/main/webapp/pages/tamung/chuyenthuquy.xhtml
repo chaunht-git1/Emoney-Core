@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+        
+        <b:container fluid="true">
+            <h:form>
+               
+                <b:panel title="Điều kiện" look="primary" collapsible="false" >
+                    <b:row>
+                        <b:column medium-screen="6">
+                            <b:commandButton value="Lưu dữ liệu" look="primary"  class="btn-sm"   /> 
+                        </b:column>
+                        <b:column  medium-screen="6">
+                                <b:buttonGroup style="float: right">
+                                    <h:commandLink >
+                                        <p:graphicImage value="../../resources/image/ms-excel.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="baocaosodu" />
+                                    </h:commandLink>
+                                </b:buttonGroup>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+                <b:panel title="Thông tin dữ liệu" look="primary" collapsible="false" >
+                 
+                    <b:row>
+                        <p:dataTable id="tbl"  binding="#{table}" var="item" value="#{tamungpsManagedBean.dschitiet}" reflow="true" rows="8" paginator="true" >     
+      
+                            <p:column headerText="Stt">
+                                <h:outputText value="#{table.rowIndex+1}" />
+                            </p:column>
+                            <p:column headerText="Tên đối tác">
+                                <h:outputText value="#{item.tendoitac}" />
+                            </p:column>
+                            <p:column headerText="Mã người nhận">
+                                <h:outputText value="#{item.manguoinhan}" />
+                            </p:column>
+                            <p:column headerText="Số tiền ">
+                                <h:outputText value="#{item.sotiengoi}" />
+                            </p:column>
+                            <p:column headerText="Loại tiền">
+                                <h:outputText value="#{item.id_loaitienchitra}" />
+                            </p:column>
+                        </p:dataTable>
+                    </b:row>
+                </b:panel>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>

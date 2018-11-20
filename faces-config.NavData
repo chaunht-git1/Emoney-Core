@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="pages/index.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="pages/templates/footer.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="pages/templates/mainchitra.xhtml" x="992" y="576" zoom="true"/>
+        <Node id="pages/phanquyen/dvkhdinhnghidoitacps.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="pages/tamung/tamungphainhhoso.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="pages/chitra/quanlydsmoneygram.xhtml" x="746" y="489" zoom="true"/>
+        <Node id="pages/templates/main.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="pages/report/downloadbn.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="pages/hoibao/chitietdsdaily.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="pages/tamung/xacnhandothsphatsinh.xhtml" x="321" y="50" zoom="true"/>
+        <Node id="pages/congnonv/taosolieucongno.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="pages/hoibao/xacnhandothbtodaychitiet.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="pages/templates/leftmenu.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="pages/chitra/timkiemthongtingiaodich.xhtml" x="834" y="443" zoom="true"/>
+        <Node id="pages/tamung/ttchitiet.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="pages/report/testreport.xhtml" x="808" y="29" zoom="true"/>
+        <Node id="pages/templates/leftmenuchitra.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="pages/hoibao/exportsolieuomnex.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="pages/chitra/quanlythembarcode.xhtml" x="539" y="596" zoom="true"/>
+        <Node id="pages/tamung/xacnhanhshoanungps.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="pages/tamung/thongtindothsphatsinh.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="pages/tamung/chuyenthuquy.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="*" x="472" y="64" zoom="true"/>
+        <Node id="pages/hoibao/exportsolieuomnexchitiet.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="pages/hoibao/quanlyhoibao.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="pages/hoibao/xacnhandothbtoday.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="login.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="pages/templates/contenchitra.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="pages/templates/content.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="pages/templates/mainphanquyen.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="pages/chitra/timkiemkhachhang.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="pages/templates/contentphanquyen.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="pages/templates/header.xhtml" x="400" y="150" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

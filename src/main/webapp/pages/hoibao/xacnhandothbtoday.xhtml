@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+        
+        <b:container fluid="true">
+            <h:form>
+               
+                <b:panel title="Điều kiện" look="primary" collapsible="false" >
+                    <b:row>
+                        <b:column medium-screen="6">
+                            <b:panelGrid columns="2">
+                                <h:outputText value="Ngày tạo :" />
+                                <p:calendar  id="ngay" value="#{xacnhantthoibaoManagedBean.ngaytk}" navigator="true" yearRange="-100:+0" pattern="dd/MM/yyyy"/>
+                                <h:outputLabel value="Đối tác:" style="font-weight: bold"/>
+                                <p:selectOneMenu id="thanhphoch"  value="#{xacnhantthoibaoManagedBean.iddoitac}" required="true" requiredMessage="Chọn Đối Tác" styleClass="input-checklist-nomal">
+                                    <f:selectItem itemLabel="--Chọn Đối tác--"/>
+                                    <f:selectItems var="datachoice" value="#{globalManagedBean.doitacLists}" itemValue="#{datachoice.idcode}" itemLabel="#{datachoice.description}" />
+                                </p:selectOneMenu>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1" style="width: 150px">Trạng thái:</span>
+                                    <h:selectOneMenu  class="dropdown form-control " id="trangthai" value="#{xacnhantthoibaoManagedBean.loaihb}" required="true" requiredMessage="Vui lòng chọn trạng thái hồi báo" >                     
+                                        <f:selectItem itemValue="HB" itemLabel="Đã chi trả - File P" />
+                                        <f:selectItem itemValue="XM" itemLabel="Tồn đọng - File C" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <b:commandButton value="Hiện thống tin" look="primary"  class="btn-sm" action="#{xacnhantthoibaoManagedBean.getsolieu()}"  />
+                            </b:panelGrid>
+ 
+                        </b:column>
+       
+                    </b:row>
+                </b:panel>
+                <b:panel title="Thông tin dữ liệu" look="primary" collapsible="false" >
+                    <b:row>
+                        <p:dataTable id="tbl" binding="#{table}" var="item" value="#{xacnhantthoibaoManagedBean.hoibaoListGroup}" reflow="true" rows="8" paginator="true" >            
+   
+                            <p:column headerText="Stt">
+                                 <h:outputText value="#{table.rowIndex+1}" />
+                            </p:column>
+                            <p:column headerText="Tên đối tác" colspan="2">
+                                <h:outputText value="#{item.doitacname}" />
+                            </p:column>
+                            <p:column headerText="Ngày">
+                                <h:outputText value="#{item.charngay}" />
+                            </p:column>
+                            <p:column headerText="Giờ">
+                                <h:outputText value="#{item.chargio}" />
+                            </p:column>
+                            <p:column headerText="Số hồ sơ">
+                                <h:outputText value="#{item.shs}" />
+                            </p:column>
+                           <p:column headerText="">
+                                 <b:buttonGroup >
+                                     <p:commandLink value="Chi tiết" action="#{exportOmnexManagedBean.showdetailfilep(item.iddoitac)}"  >
+                                 
+                                     </p:commandLink>
+                                 </b:buttonGroup>
+                            </p:column>
+                        </p:dataTable>
+                    </b:row>
+                </b:panel>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>

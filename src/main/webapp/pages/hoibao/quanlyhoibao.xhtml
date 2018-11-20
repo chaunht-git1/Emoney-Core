@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="content">   
+     <b:container fluid="true">
+         <b:row   class="well">
+             <h:form>
+             <b:column span="3">
+                 <div class="form-group">
+                     <div class="input-group">
+                         <span class="input-group-addon" id="addon" >Ngày biên nhận:</span>
+                         <p:calendar  id="ngaybiennhan" value="#{hoibaoManagerBean.ngaybiennhan}" navigator="true" yearRange="-100:+0" pattern="dd/MM/yyyy"/>
+                     </div>
+                     <div class="input-group">
+                     <span class="input-group-addon" id="addon" >Đối tác:</span>
+                     <b:selectOneMenu id="doitac"  value="#{hoibaoManagerBean.iddoitac}" required="true" requiredMessage="Chọn Đối tác" styleClass="input-checklist-nomal">
+                        <f:selectItem itemLabel="--Chọn Đối tác--"/>
+                        <f:selectItems var="datachoice" value="#{globalManagedBean.doitacLists}" itemValue="#{datachoice.idcode}" itemLabel="#{datachoice.description}" />
+                     </b:selectOneMenu>
+                     </div>
+                
+                     <b:commandButton value="Hiện thông tin" action="#{hoibaoManagerBean.hienthithongtinmaster()}" />
+                 
+                 </div>
+             </b:column> '
+             </h:form>
+         </b:row>
+       <b:row>
+           <b:column span="12">
+            <h:form>
+    
+                    <p:dataTable id="showdata" binding="#{table}" value="#{hoibaoManagerBean.dsgiaodich}" var="item" paginator="true"    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rows="6">
+                        <p:column style="width: 3% ; text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Stt"/>
+                            </f:facet>
+                            <p:outputLabel value="#{table.rowIndex+1}" />
+                        </p:column>
+                          <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Khóa"/>
+                            </f:facet>
+                            #{item.idcode}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Đối tác"/>
+                            </f:facet>
+                            #{item.doitacname}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Đại lý"/>
+                            </f:facet>
+                            #{item.agent}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ngày biên nhận"/>
+                            </f:facet>
+                            #{item.ngaybiennhan}
+                        </p:column>
+                      
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Số hồ sơ"/>
+                            </f:facet>
+                            #{item.shs}
+                        </p:column>
+                        <p:column>
+                            <b:buttonGroup  >
+                                <b:commandButton value="Chi tiết"  action="#{hoibaoManagerBean.hienthithongtindetail(item.idcode)}" >
+                                </b:commandButton>
+                                <b:button value="Download" />
+                            </b:buttonGroup>
+                        </p:column>
+
+                    </p:dataTable>
+
+            </h:form>
+        </b:column>
+       </b:row>
+     </b:container> 
+    </ui:define>
+</ui:composition> 
+

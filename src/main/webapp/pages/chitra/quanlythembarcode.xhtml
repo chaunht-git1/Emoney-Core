@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="content">     
+
+        <h:form>
+            <div class="container col-sm-12">
+            <div class="row ">
+                 <div class="col-sm-12 wellcustom" >
+
+                    <p:commandButton value="Hiện thông tin" action="#{barcodeManagedBean.hienthongtinmaster()}" ajax="false">
+                               <p:ajax update="showdata"/>
+                    </p:commandButton> 
+                 </div>
+            </div>
+             <div class="row ">
+                 <div class="col-sm-12 wellcustom" >
+              <p:dataTable id="showdata" rowIndexVar="rowIndex" value="#{barcodeManagedBean.vwBarcodeKieuhoiListMasters}" var="item" paginator="true"  rows="20" paginatorPosition="top"  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " rowsPerPageTemplate="10,20,30">
+                    <p:column style="width: 3% ; text-align: center" >
+                        <f:facet name="header">
+                            <h:outputText value="Stt"/>
+                        </f:facet>
+                        <p:outputLabel value="#{rowIndex+1}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Số phiếu"/>
+                        </f:facet>
+                        #{item.sophieu}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Mã đối tác"/>
+                        </f:facet>
+                        #{item.iddoitac}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tên đối tác"/>
+                        </f:facet>
+                        #{item.doitacname}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Trạng thái barcode"/>
+                        </f:facet>
+                        #{item.barcodestatus}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Barcode"/>
+                        </f:facet>
+                        #{item.barcode}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Số hồ sơ"/>
+                        </f:facet>
+                        #{item.shs}
+                    </p:column>
+                    <p:column style="width: 5% ; text-align: center">
+                        <p:commandLink value="Tạo nhanh" action="#{barcodeManagedBean.xulytaonhanhinsertlaibarcode()}"  disabled="#{item.disChitiet}" style="font-weight: bold">
+                            <f:setPropertyActionListener value="#{item}" target="#{barcodeManagedBean.vwBarcodeKieuhoiListMaster}"/>
+                             <p:ajax update="showdata"/>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+                 </div>
+             </div>
+                </div>
+        </h:form>
+    </ui:define>
+      <style type="text/css">.colored {
+
+            color: #FF0000;
+        }
+    </style>
+</ui:composition> 

@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+
+    <ui:define name="content">  
+
+        <b:container fluid="true">
+            <b:row style="min-height: 600px">
+                <b:column  >
+                    <h:form id="chitiet">                   
+                        <b:row>
+                            <div class="form-row">
+                                <div class="form-group  well well-sm col-sm-12 ">
+                                    <div class="form-inline">
+                                        <p:messages id="messages" showDetail="true" closable="true">
+                                            <p:autoUpdate />
+                                        </p:messages>
+                                    </div>
+                                    <div class="form-inline">
+                                        <label for="idtk" style="min-width: 150px ">Loại tìm kiếm</label>
+                                        <h:selectOneMenu id="loaitk" class="dropdown input-sm" style="min-width: 300px"  value="#{hoanungpsManagedBean.loaitkiem.valuetk}" required="true" requiredMessage="Chọn loại tạm ứng"   >
+                                            <f:selectItem class="dropdown item"  itemLabel="--Loại tìm kiếm--"/>
+                                            <f:selectItem  itemLabel="Chưa hoàn ứng" itemValue="N"/>
+                                            <f:selectItem  itemLabel="Đã hoàn ứng" itemValue="Y"/>
+                                        </h:selectOneMenu>
+                                        <div class="btn-group">
+                                            <b:commandButton  class="btn-sm" icon="refresh"  value="" look="primary"  action="#{hoanungpsManagedBean.init()}"   >
+                                                <p:ajax update="chitiet"/>
+                                            </b:commandButton>
+                                            <b:commandButton value="Tìm kiếm" look="primary" icon="ok"  class="btn-sm" action="#{hoanungpsManagedBean.hienthithongtinmaster(systemManagedBean.model.homebranch, systemManagedBean.model.userid)}"  />
+                                        </div>
+                                    </div>
+
+
+                                </div>                        
+                            </div>
+
+                        </b:row>
+                        <b:row>
+                            <div class="form-group  well well-sm col-sm-12 ">
+                                <div class="form-row">
+
+                                    <p:dataTable id="tbl" binding="#{table}" var="item" value="#{hoanungpsManagedBean.dsgiaodich}" reflow="true" rows="8" paginator="true"   emptyMessage="Không tìm thấy dữ liệu"  >     
+
+                                        <p:column headerText="Stt" style="text-align: center" >
+                                            <h:outputText value="#{table.rowIndex+1}" />
+                                        </p:column>
+                                        <p:column headerText="Nhân viên" colspan="3">
+                                            <h:outputText value="#{item.tennhanvien}" />
+                                        </p:column>
+                                        <p:column headerText="TỔNG HS">
+                                            <p:commandLink value="#{item.tongshs}"  update="chitiet"  oncomplete="PF('thongbaoluu').show();"  actionListener="#{hoanungpsManagedBean.thongtinchitiet(item,systemManagedBean.model.homebranch,systemManagedBean.model.userid,'A')}"   style="float: right">
+                                             
+                                            </p:commandLink>
+                                        </p:column>
+                                        <p:column headerText="TỒN">
+                                         
+                                              <p:commandLink value="#{item.hston}"  update="chitiet"  oncomplete="PF('thongbaoluu').show();"  actionListener="#{hoanungpsManagedBean.thongtinchitiet(item,systemManagedBean.model.homebranch,systemManagedBean.model.userid,'N')}"   style="float: right">
+                                             
+                                               </p:commandLink>
+                                         
+                                            
+                                        </p:column>
+                                        <p:column headerText="CHI TRẢ">
+                                            <p:commandLink value="#{item.hsdachitra}"  update="chitiet"  oncomplete="PF('thongbaoluu').show();"  actionListener="#{hoanungpsManagedBean.thongtinchitiet(item,systemManagedBean.model.homebranch,systemManagedBean.model.userid,'Y')}"   style="float: right">
+                                             
+                                               </p:commandLink>
+                                        </p:column>
+                                        <p:column headerText="ĐÃ HT">
+                                            <h:outputText value="#{item.phantramhoanthanh}" style="float: right"/>
+                                        </p:column>
+                                        <p:column headerText="LOẠI TU" colspan="3">
+                                            <h:outputText value="#{item.tenloaitu}" style="float: right"/>
+                                        </p:column>
+
+                                        <p:column style="text-align: center" colspan="2">
+                                            <div class="btn btn-group-sm">
+                                                <b:button value="Xác nhận " look="primary" icon="ok"  class="btn-sm"    onclick="PF('thongbaoluu').show();"  /> 
+ 
+                                            </div>
+
+                                        </p:column>
+                                    </p:dataTable>
+
+                                </div>
+
+                            </div>
+
+                        </b:row>
+                        <p:dialog  style="padding-top: 60px; padding-bottom: 20px;min-height: 300px "  header="Thông tin chi tiết" widgetVar="thongbaoluu"  minHeight="600"  minWidth="100" closable="true" modal="true" position="top">
+                            <b:container>
+                            <b:container fluid="true">
+                                           <div class="form-group   well well-sm col-sm-12 " >
+                                               <div class="form-row">
+                                                   <p:dataTable id="tbldetail" binding="#{tablesub}"   var="item" value="#{hoanungpsManagedBean.dschitiet}" reflow="true"    emptyMessage="Không tìm thấy dữ liệu"  >   
+                                                       <p:column headerText="Stt" style="text-align: center" >
+                                                           <h:outputText value="#{tablesub.rowIndex+1}" />
+                                                       </p:column>
+                                                       <p:column headerText="Nhân viên" colspan="3">
+                                                           <h:outputText value="#{item.hoten}" />
+                                                       </p:column>
+                                                        <p:column headerText="Số biên nhận" colspan="3">
+                                                            <h:outputText value="#{item.sobn}" />
+                                                       </p:column>
+                                                        <p:column headerText="Số tiền" colspan="3">
+                                                            <h:outputText value="#{item.sotiengoi}" />
+                                                       </p:column>
+                                                       <p:column headerText="Tỷ giá" colspan="3">
+                                                           <h:outputText value="#{item.tygia}" />
+                                                       </p:column>
+                                                         <p:column headerText="Thành tiền" colspan="3">
+                                                             <h:outputText value="#{item.thanhtien}" />
+                                                       </p:column>
+                                                        <p:column headerText="Loại tiền" colspan="3">
+                                                            <h:outputText value="#{item.idLoaitienchitra}" />
+                                                       </p:column>
+                                                   </p:dataTable>
+                                               </div>
+                                           </div>
+                               </b:container>
+                             </b:container>  
+                        </p:dialog>  
+                        <p:dialog header="Thông báo" widgetVar="thongbaoxoa" minHeight="200" height="200" width="300" minWidth="100" closable="false" modal="true" position="center">
+                            <div class="form-row" style="min-height: 80px;padding-top: 20px">
+                                <h:outputLabel value="Bạn muốn xoa dữ liệu ?"/>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <div class="btn-group">
+                                        <b:commandButton class="btn-sm" icon="ok"  value="Đồng ý" look="primary" actionListener="#{roleManagedBean.capnhatthongtin('delete', roleManagedBean.chitiet)}" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6  ">
+                                    <b:button class="btn-sm" icon="log-out"  value="Thoát" look="danger" onclick="PF('thongbaoxoa').hide();" />
+                                </div>
+                            </div>
+
+                        </p:dialog>    
+                    </h:form>
+
+                </b:column>
+
+            </b:row>
+
+        </b:container>
+    </ui:define>
+</ui:composition>

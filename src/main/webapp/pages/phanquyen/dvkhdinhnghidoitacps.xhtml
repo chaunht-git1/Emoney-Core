@@ -1,0 +1,161 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/mainphanquyen.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+
+        <b:container fluid="true">
+
+            <b:row style="min-height: 600px">
+                <b:column  >
+                    <h:form id="chitiet">
+                        <b:row>
+                            <div class="well well-sm">
+                                <b:buttonGroup>
+                                    <b:commandButton class="btn-sm" icon="plus"  value="Tạo mới" look="primary" action="#{roleManagedBean.taomoi()}" >
+                                        <p:ajax update="chitiet"/>
+                                    </b:commandButton>
+                                    <b:commandButton class="btn-sm" icon="lock"  value="Mở khóa" look="primary" action="#{roleManagedBean.mokhoa()}">
+                                        <p:ajax update="chitiet"/>
+                                    </b:commandButton>    
+                                    <b:commandButton class="btn-sm" icon="refresh"  value="Làm mới dữ liệu" look="primary"  action="#{roleManagedBean.hienthithongtinmaster()}"   >
+                                        <p:ajax update="chitiet tonghop"/>
+                                    </b:commandButton>
+                                </b:buttonGroup>
+                                <h:outputLabel style="float: right" value="#{roleManagedBean.statusRecord}"/>
+                            </div>
+
+                        </b:row>
+                        <b:row>
+                            <b:container   class="well well-sm col-lg-12">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <div class="form-inline">
+                                             <label for="idCode" style="min-width: 150px ">Khóa</label>
+                                             <p:inputText value="#{roleManagedBean.chitiet.idcode}" style="min-width: 300px"   id="idCode" placeholder="Khóa" readonly="true"/>
+                                        </div>
+                                        <div class="form-inline">
+                                            <label style="min-width: 150px" for="tenDoitac">Tên đối tác</label>
+                                            <h:selectOneMenu id="tenDoitac" class="dropdown input-sm" style="min-width: 300px"  value="#{roleManagedBean.chitiet.iddoitac}" required="true" requiredMessage="Chọn Đối tác"   >
+                                                <f:selectItem  itemLabel="--Chọn Đối tác--"/>
+                                                <f:selectItems var="datachoice" value="#{globalManagedBean.doitacLists}" itemValue="#{datachoice.idcode}" itemLabel="#{datachoice.description}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                                       <div class="form-inline">
+                                            <label style="min-width: 150px"  for="timefrom">Từ</label>
+                                            <p:spinner  id="timefrom" min="0" max="24"     value="#{roleManagedBean.chitiet.timefrom}"  >
+                                                <f:convertNumber/>
+                                            </p:spinner>
+                                        </div>
+                                        <div class="form-inline">
+                                            <label style="min-width: 150px"  for="timeto">Đến</label>
+                                            <p:spinner id="timeto"    min="0" max="24"       value="#{roleManagedBean.chitiet.timeto}" >
+                                                 <f:convertNumber/>
+                                            </p:spinner>
+                                        </div>
+                                     
+                                        <div class="form-inline">
+                                            <div class="btn-group">
+                                                  <b:button class="btn-sm" disabled="#{roleManagedBean.hidebuttonsave}" style="min-width:100px" icon="save"  value="Lưu"  look="primary"  onclick="PF('thongbaoluu').show();"  />
+                                                  <b:button class="btn-sm" disabled="#{roleManagedBean.hidebuttondel}" style="min-width:100px" icon="remove-circle"  value="Xóa"  look="danger"  onclick="PF('thongbaoxoa').show();"  />
+                                            </div>
+                                           
+                                        </div>
+                                     
+                                     </div>
+                                    <div class="form-group col-sm-6">
+                                         <div class="form-inline">
+                                             <label for="makerid" style="min-width: 150px">Người tạo</label>
+                                             <p:inputText  class="input-sm"   value="#{roleManagedBean.chitiet.makerid}" readonly="true" style="min-width: 300px"   id="makerid" placeholder="Người tạo"/>
+                                        </div>
+                                         <div class="form-inline">
+                                             <label for="ngaytao" style="min-width: 150px">Ngày tạo</label>
+                                              <p:inputText class="input-sm"    value="#{roleManagedBean.chitiet.date_modified}"  readonly="true" style="min-width: 300px"   id="ngaytao" >
+                                                  <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                              </p:inputText>    
+                                        </div>
+                                        <div class="form-inline">
+                                             <label for="duyet" style="min-width: 150px">Duyệt</label>
+                                             <p:inputText value="#{roleManagedBean.chitiet.duyet}" readonly="true" style="min-width: 300px"   id="duyet" placeholder="Duyệt"/>
+                                        </div>
+                                         <div class="form-inline">
+                                             <label for="ngayduyet" style="min-width: 150px">Ngày duyệt</label>
+                                             <p:inputText class="input-sm"    value="#{roleManagedBean.chitiet.ngayduyet}"  readonly="true" style="min-width: 300px"   id="ngayduyet"  >
+                                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                             </p:inputText>    
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </b:container>
+                        </b:row>
+                        <p:dialog header="Thông báo" widgetVar="thongbaoluu" minHeight="200" height="200" width="300" minWidth="100" closable="false" modal="true" position="center">
+                            <div class="form-row" style="min-height: 80px;padding-top: 20px">
+                                <h:outputLabel value="Bạn muốn lưu dữ liệu ?"/>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <div class="btn-group">
+                                           <b:commandButton class="btn-sm" icon="ok"  value="Đồng ý" look="primary" actionListener="#{roleManagedBean.capnhatthongtin(roleManagedBean.statusRecord, roleManagedBean.chitiet)}" />
+                                    </div>
+                                
+                                </div>
+                                <div class="form-group col-sm-6  ">
+                                    <b:button class="btn-sm" icon="log-out"  value="Thoát" look="danger" onclick="PF('thongbaoluu').hide();" />
+                                </div>
+                            </div>
+
+                        </p:dialog>  
+                         <p:dialog header="Thông báo" widgetVar="thongbaoxoa" minHeight="200" height="200" width="300" minWidth="100" closable="false" modal="true" position="center">
+                            <div class="form-row" style="min-height: 80px;padding-top: 20px">
+                                <h:outputLabel value="Bạn muốn xoa dữ liệu ?"/>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <div class="btn-group">
+                                           <b:commandButton class="btn-sm" icon="ok"  value="Đồng ý" look="primary" actionListener="#{roleManagedBean.capnhatthongtin('delete', roleManagedBean.chitiet)}" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6  ">
+                                    <b:button class="btn-sm" icon="log-out"  value="Thoát" look="danger" onclick="PF('thongbaoxoa').hide();" />
+                                </div>
+                            </div>
+
+                        </p:dialog>    
+                    </h:form>
+                    <h:form id="tonghop">
+                        <b:row>
+
+                            <p:dataTable id="tbl" binding="#{table}" var="item" value="#{roleManagedBean.dsgiaodich}" reflow="true"  >     
+                                <p:column headerText="Stt">
+                                    <h:outputText value="#{table.rowIndex+1}" />
+                                </p:column>
+                                <p:column headerText="Tên đối tác">
+                                    <h:outputText value="#{item.tendoitac}" />
+                                </p:column>
+                                <p:column headerText="Bắt đầu ">
+                                    <h:outputText value="#{item.timefrom}" />
+                                </p:column>
+                                <p:column headerText="Kết thúc ">
+                                    <h:outputText value="#{item.timeto}" />
+                                </p:column>
+                                <p:column headerText="">
+                                    <b:commandButton class="btn-sm"   value="Chi tiết"  action="#{roleManagedBean.hienthithongtindetail(item)}"  look="primary" >
+                                        <p:ajax update="chitiet"/>
+                                    </b:commandButton>
+                                </p:column>     
+                            </p:dataTable>
+                        </b:row>
+                    </h:form>
+                </b:column>
+
+            </b:row>
+           
+        </b:container>
+    </ui:define>
+</ui:composition>

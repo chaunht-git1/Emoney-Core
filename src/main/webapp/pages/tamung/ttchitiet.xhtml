@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/main.xhtml"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">    
+
+        <b:container fluid="true">
+            <h:form>
+                <b:row>
+                    <b:column medium-screen="6">
+                        <b:commandButton icon="back" value="Đóng" look="primary"  class="btn-sm"   action="#{systemManagedBean.funcPreviouspage(tamungpsManagedBean.previouspage)}" />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <div class="form-row">
+                        <div class="form-group  well well-sm col-sm-12 ">
+                            <p:dataTable id="tbl"  binding="#{table}" var="item" value="#{tamungpsManagedBean.dschitiet}"   paginator="false" >     
+
+                                <p:column headerText="Stt">
+                                    <h:outputText value="#{table.rowIndex+1}" />
+                                </p:column>
+                                <p:column headerText="Tên đối tác">
+                                    <h:outputText value="#{item.tendoitac}" />
+                                </p:column>
+                                <p:column headerText="Mã người nhận">
+                                    <h:outputText value="#{item.manguoinhan}" />
+                                </p:column>
+                                <p:column headerText="Số tiền ">
+                                    <h:outputText value="#{item.sotiengoi}" />
+                                </p:column>
+                                <p:column headerText="Loại tiền">
+                                    <h:outputText value="#{item.id_loaitienchitra}" />
+                                </p:column>
+
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </b:row>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>
